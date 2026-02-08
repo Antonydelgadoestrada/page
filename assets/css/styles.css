@@ -596,6 +596,73 @@ body {
 }
 
 /* ============================================
+   SECCIÓN: PARTNER PROGRAM
+   ============================================ */
+
+.partner-program {
+    padding: var(--spacing-2xl) 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+}
+
+.partner-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-2xl);
+    align-items: center;
+}
+
+.partner-text h2 {
+    color: white;
+}
+
+.partner-description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: var(--spacing-lg);
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.partner-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.partner-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 768px) {
+    .partner-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+
+    .partner-text h2 {
+        font-size: 2rem;
+    }
+
+    .partner-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .partner-text h2 {
+        font-size: 1.5rem;
+    }
+
+    .partner-description {
+        font-size: 0.9rem;
+        margin-bottom: var(--spacing-md);
+    }
+}
+
+/* ============================================
    SECCIÓN: QUIÉNES SOMOS
    ============================================ */
 
