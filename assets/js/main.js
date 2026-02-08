@@ -383,7 +383,7 @@ const equipments = {
     domestico: {
         title: 'Doméstico',
         desc: 'Ofrecemos tableros domésticos en cajas de plástico resistente, diseñados para la protección y distribución eléctrica en viviendas. Son duraderos y personalizables según la cantidad de equipos a instalar, garantizando una solución segura y funcional.',
-        image: 'assets/images/equipo-domestico.jpg',
+        image: 'assets/images/tablero-electrico-domestico.png',
     },
     adosado: {
         title: 'Adosado',
