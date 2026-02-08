@@ -523,8 +523,10 @@ body {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-lg);
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 .stat-card {
@@ -1312,6 +1314,7 @@ body {
 
     .stats-grid {
         gap: var(--spacing-md);
+        grid-template-columns: 1fr;
     }
 
     .stat-card {
