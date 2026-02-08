@@ -415,6 +415,21 @@ body {
     transition: var(--transition);
 }
 
+.partner-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 1rem;
+}
+
+.partner-logo {
+    height: 40px;
+    width: auto;
+    display: block;
+    object-fit: contain;
+}
+
 /* ============================================
    HERO SECTION
    ============================================ */
@@ -1327,6 +1342,19 @@ body {
 
     .stat-icon {
         font-size: 2.5rem;
+    }
+
+    .navbar-logo {
+        height: 36px;
+        margin-right: 12px;
+    }
+
+    .partner-badge {
+        margin-right: 0.5rem;
+    }
+
+    .partner-logo {
+        height: 30px;
     }
 
     .navbar-brand h1 {
