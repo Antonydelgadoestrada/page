@@ -368,6 +368,113 @@ body {
     to { transform: translateX(calc(-1 * var(--providers-distance))); }
 }
 
+/* ============================================
+   GALERÍA: FOTOS Y VIDEOS
+   ============================================ */
+
+.galeria {
+    padding: var(--spacing-2xl) 0;
+    background: white;
+}
+
+.gallery-carousel {
+    overflow: hidden;
+    margin-top: var(--spacing-lg);
+}
+
+.gallery-track {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    animation: scroll-gallery var(--gallery-duration, 15s) linear infinite;
+    will-change: transform;
+}
+
+.gallery-item {
+    flex: 0 0 auto;
+    min-width: 300px;
+    height: 250px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--light);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-item video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery-video {
+    position: relative;
+    background: #000;
+}
+
+.play-icon {
+    position: absolute;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
+    transition: var(--transition);
+    pointer-events: none;
+}
+
+.gallery-item:hover .play-icon {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.gallery-track:hover {
+    animation-play-state: paused;
+}
+
+@keyframes scroll-gallery {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-1 * var(--gallery-distance))); }
+}
+
+@media (max-width: 900px) {
+    .gallery-item {
+        min-width: 220px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 600px) {
+    .gallery-item {
+        min-width: 160px;
+        height: 130px;
+    }
+
+    .play-icon {
+        font-size: 2rem;
+    }
+}
+
 .navbar-logo {
     height: 48px;
     width: auto;

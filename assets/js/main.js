@@ -589,6 +589,58 @@ function initProvidersCarousel() {
     window.addEventListener('resize', track._providersResizeHandler, { passive: true });
 }
 
+function initGalleryCarousel() {
+    const track = document.querySelector('.gallery-track');
+    if (!track) return;
+
+    // Duplicar contenido solo una vez para efecto infinito
+    if (!track.dataset.inited) {
+        track.innerHTML = track.innerHTML + track.innerHTML;
+        track.dataset.inited = '1';
+    }
+
+    // Calcular ancho original (la mitad del track duplicado)
+    const originalWidth = Math.floor(track.scrollWidth / 2) || 0;
+
+    // Usar desplazamiento en píxeles para evitar cortes
+    track.style.setProperty('--gallery-distance', originalWidth + 'px');
+
+    // Establecer duración (heurística: ~200px por segundo)
+    const duration = Math.max(12, Math.round(originalWidth / 200));
+    track.style.setProperty('--gallery-duration', duration + 's');
+
+    // Recalcular duración/distancia al redimensionar (sin volver a duplicar)
+    if (track._galleryResizeHandler) {
+        window.removeEventListener('resize', track._galleryResizeHandler);
+    }
+
+    track._galleryResizeHandler = () => {
+        clearTimeout(track._galleryResizeTimeout);
+        track._galleryResizeTimeout = setTimeout(() => {
+            const w = Math.floor(track.scrollWidth / 2) || 0;
+            track.style.setProperty('--gallery-distance', w + 'px');
+            const d = Math.max(12, Math.round(w / 200));
+            track.style.setProperty('--gallery-duration', d + 's');
+        }, 200);
+    };
+
+    window.addEventListener('resize', track._galleryResizeHandler, { passive: true });
+
+    // Agregar funcionalidad de click en videos para abrir modal
+    const galleryVideos = document.querySelectorAll('.gallery-video');
+    galleryVideos.forEach(videoItem => {
+        videoItem.addEventListener('click', (e) => {
+            const video = videoItem.querySelector('video');
+            if (video) {
+                video.toggleAttribute('controls');
+                if (video.paused) {
+                    video.play();
+                }
+            }
+        });
+    });
+}
+
 // ============================================
 // ANIMACIÓN DE NÚMEROS (Conteo)
 // ============================================
@@ -635,6 +687,7 @@ function animateCountUp() {
 document.addEventListener('DOMContentLoaded', () => {
     initClientsCarousel();
     initProvidersCarousel();
+    initGalleryCarousel();
     animateCountUp();
 });
 
