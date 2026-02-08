@@ -591,14 +591,16 @@ function initProvidersCarousel() {
 
 function initGalleryCarousel() {
     const galleryData = [
-        { type: 'image', src: 'assets/images/gallery/foto1.jpg', alt: 'Proyecto 1' },
-        { type: 'image', src: 'assets/images/gallery/foto2.jpg', alt: 'Proyecto 2' },
-        { type: 'video', src: 'assets/videos/video1.mp4', alt: 'Video 1' },
-        { type: 'image', src: 'assets/images/gallery/foto3.jpg', alt: 'Proyecto 3' },
-        { type: 'image', src: 'assets/images/gallery/foto4.jpg', alt: 'Proyecto 4' },
-        { type: 'video', src: 'assets/videos/video2.mp4', alt: 'Video 2' },
-        { type: 'image', src: 'assets/images/gallery/foto5.jpg', alt: 'Proyecto 5' },
-        { type: 'image', src: 'assets/images/gallery/foto6.jpg', alt: 'Proyecto 6' }
+        { type: 'image', src: 'assets/images/gallery/foto1.jpeg', alt: 'Proyecto 1' },
+        { type: 'image', src: 'assets/images/gallery/foto2.jpeg', alt: 'Proyecto 2' },
+        { type: 'video', src: 'assets/images/gallery/video1.mp4', alt: 'Video 1' },
+        { type: 'image', src: 'assets/images/gallery/foto3.jpeg', alt: 'Proyecto 3' },
+        { type: 'image', src: 'assets/images/gallery/foto4.jpeg', alt: 'Proyecto 4' },
+        { type: 'video', src: 'assets/images/gallery/video2.mp4', alt: 'Video 2' },
+        { type: 'image', src: 'assets/images/gallery/foto5.jpeg', alt: 'Proyecto 5' },
+        { type: 'image', src: 'assets/images/gallery/foto6.jpeg', alt: 'Proyecto 6' },
+        { type: 'image', src: 'assets/images/gallery/foto7.jpeg', alt: 'Proyecto 7' },
+        { type: 'image', src: 'assets/images/gallery/foto8.jpeg', alt: 'Proyecto 8' }
     ];
 
     let currentIndex = 0;
