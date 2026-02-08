@@ -590,55 +590,131 @@ function initProvidersCarousel() {
 }
 
 function initGalleryCarousel() {
-    const track = document.querySelector('.gallery-track');
-    if (!track) return;
+    const galleryData = [
+        { type: 'image', src: 'assets/images/gallery/foto1.jpg', alt: 'Proyecto 1' },
+        { type: 'image', src: 'assets/images/gallery/foto2.jpg', alt: 'Proyecto 2' },
+        { type: 'video', src: 'assets/videos/video1.mp4', alt: 'Video 1' },
+        { type: 'image', src: 'assets/images/gallery/foto3.jpg', alt: 'Proyecto 3' },
+        { type: 'image', src: 'assets/images/gallery/foto4.jpg', alt: 'Proyecto 4' },
+        { type: 'video', src: 'assets/videos/video2.mp4', alt: 'Video 2' },
+        { type: 'image', src: 'assets/images/gallery/foto5.jpg', alt: 'Proyecto 5' },
+        { type: 'image', src: 'assets/images/gallery/foto6.jpg', alt: 'Proyecto 6' }
+    ];
 
-    // Duplicar contenido solo una vez para efecto infinito
-    if (!track.dataset.inited) {
-        track.innerHTML = track.innerHTML + track.innerHTML;
-        track.dataset.inited = '1';
-    }
+    let currentIndex = 0;
 
-    // Calcular ancho original (la mitad del track duplicado)
-    const originalWidth = Math.floor(track.scrollWidth / 2) || 0;
+    // Elementos del DOM
+    const galleryDisplay = document.getElementById('galleryDisplay');
+    const playBtn = document.getElementById('playBtn');
+    const galleryPrev = document.querySelector('.gallery-prev');
+    const galleryNext = document.querySelector('.gallery-next');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const lightboxModal = document.getElementById('lightboxModal');
+    const lightboxDisplay = document.getElementById('lightboxDisplay');
+    const lightboxClose = document.getElementById('lightboxClose');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+    const galleryMain = document.querySelector('.gallery-main');
 
-    // Usar desplazamiento en píxeles para evitar cortes
-    track.style.setProperty('--gallery-distance', originalWidth + 'px');
+    function updateGallery(index) {
+        currentIndex = (index + galleryData.length) % galleryData.length;
+        const item = galleryData[currentIndex];
 
-    // Establecer duración (heurística: ~200px por segundo)
-    const duration = Math.max(12, Math.round(originalWidth / 200));
-    track.style.setProperty('--gallery-duration', duration + 's');
+        // Actualizar display principal
+        galleryDisplay.innerHTML = '';
+        if (item.type === 'image') {
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.alt;
+            img.className = 'gallery-img';
+            galleryDisplay.appendChild(img);
+            playBtn.style.display = 'none';
+        } else {
+            const video = document.createElement('video');
+            video.src = item.src;
+            video.className = 'gallery-video';
+            galleryDisplay.appendChild(video);
+            playBtn.style.display = 'flex';
+        }
 
-    // Recalcular duración/distancia al redimensionar (sin volver a duplicar)
-    if (track._galleryResizeHandler) {
-        window.removeEventListener('resize', track._galleryResizeHandler);
-    }
-
-    track._galleryResizeHandler = () => {
-        clearTimeout(track._galleryResizeTimeout);
-        track._galleryResizeTimeout = setTimeout(() => {
-            const w = Math.floor(track.scrollWidth / 2) || 0;
-            track.style.setProperty('--gallery-distance', w + 'px');
-            const d = Math.max(12, Math.round(w / 200));
-            track.style.setProperty('--gallery-duration', d + 's');
-        }, 200);
-    };
-
-    window.addEventListener('resize', track._galleryResizeHandler, { passive: true });
-
-    // Agregar funcionalidad de click en videos para abrir modal
-    const galleryVideos = document.querySelectorAll('.gallery-video');
-    galleryVideos.forEach(videoItem => {
-        videoItem.addEventListener('click', (e) => {
-            const video = videoItem.querySelector('video');
-            if (video) {
-                video.toggleAttribute('controls');
-                if (video.paused) {
-                    video.play();
-                }
-            }
+        // Actualizar miniaturas
+        thumbnails.forEach((thumb, idx) => {
+            thumb.classList.toggle('active', idx === currentIndex);
         });
+
+        // Actualizar lightbox display
+        lightboxDisplay.innerHTML = '';
+        if (item.type === 'image') {
+            const img = document.createElement('img');
+            img.src = item.src;
+            img.alt = item.alt;
+            img.className = 'lightbox-img';
+            lightboxDisplay.appendChild(img);
+        } else {
+            const video = document.createElement('video');
+            video.src = item.src;
+            video.controls = true;
+            video.className = 'lightbox-video';
+            lightboxDisplay.appendChild(video);
+        }
+    }
+
+    // Event listeners para flechas
+    galleryPrev?.addEventListener('click', () => updateGallery(currentIndex - 1));
+    galleryNext?.addEventListener('click', () => updateGallery(currentIndex + 1));
+
+    // Event listeners para miniaturas
+    thumbnails.forEach((thumb, idx) => {
+        thumb.addEventListener('click', () => updateGallery(idx));
     });
+
+    // Event listener para abrir lightbox
+    galleryMain?.addEventListener('click', () => {
+        lightboxModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    // Event listeners para lightbox
+    lightboxClose?.addEventListener('click', () => {
+        lightboxModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    });
+
+    lightboxPrev?.addEventListener('click', () => updateGallery(currentIndex - 1));
+    lightboxNext?.addEventListener('click', () => updateGallery(currentIndex + 1));
+
+    // Cerrar lightbox al hacer click fuera
+    lightboxModal?.addEventListener('click', (e) => {
+        if (e.target === lightboxModal) {
+            lightboxModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Cerrar lightbox con ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightboxModal.classList.contains('active')) {
+            lightboxModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        // Navegar con flechas
+        if (lightboxModal.classList.contains('active')) {
+            if (e.key === 'ArrowLeft') updateGallery(currentIndex - 1);
+            if (e.key === 'ArrowRight') updateGallery(currentIndex + 1);
+        }
+    });
+
+    // Playback for video in main gallery
+    playBtn?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const video = galleryDisplay.querySelector('video');
+        if (video) {
+            video.play();
+        }
+    });
+
+    // Inicializar
+    updateGallery(0);
 }
 
 // ============================================

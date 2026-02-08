@@ -160,69 +160,69 @@
             <h2 class="section-title fade-in">Galería de Proyectos</h2>
             <p class="section-description fade-in-up">Conoce nuestros proyectos ejecutados y trabajos destacados</p>
 
-            <div class="gallery-carousel fade-in-up" aria-label="Carrusel de galería">
-                <div class="gallery-track">
-                    <!-- IMAGEN 1 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto1.jpg" alt="Proyecto 1">
-                    </div>
+            <div class="gallery-container fade-in-up">
+                <!-- Flecha anterior -->
+                <button class="gallery-arrow gallery-prev" aria-label="Anterior">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
 
-                    <!-- IMAGEN 2 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto2.jpg" alt="Proyecto 2">
+                <!-- Contenedor principal de imagen/video -->
+                <div class="gallery-main">
+                    <div class="gallery-display" id="galleryDisplay">
+                        <img src="assets/images/gallery/foto1.jpg" alt="Proyecto 1" class="gallery-img">
                     </div>
-
-                    <!-- VIDEO 1 -->
-                    <div class="gallery-item gallery-video">
-                        <video src="assets/videos/video1.mp4"></video>
-                        <span class="play-icon">▶</span>
-                    </div>
-
-                    <!-- IMAGEN 3 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto3.jpg" alt="Proyecto 3">
-                    </div>
-
-                    <!-- IMAGEN 4 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto4.jpg" alt="Proyecto 4">
-                    </div>
-
-                    <!-- VIDEO 2 -->
-                    <div class="gallery-item gallery-video">
-                        <video src="assets/videos/video2.mp4"></video>
-                        <span class="play-icon">▶</span>
-                    </div>
-
-                    <!-- IMAGEN 5 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto5.jpg" alt="Proyecto 5">
-                    </div>
-
-                    <!-- IMAGEN 6 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto6.jpg" alt="Proyecto 6">
-                    </div>
-
-                    <!-- VIDEO 3 -->
-                    <div class="gallery-item gallery-video">
-                        <video src="assets/videos/video3.mp4"></video>
-                        <span class="play-icon">▶</span>
-                    </div>
-
-                    <!-- IMAGEN 7 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto7.jpg" alt="Proyecto 7">
-                    </div>
-
-                    <!-- IMAGEN 8 -->
-                    <div class="gallery-item">
-                        <img src="assets/images/gallery/foto8.jpg" alt="Proyecto 8">
+                    <div class="gallery-overlay">
+                        <span class="play-btn" id="playBtn" style="display: none;">▶</span>
                     </div>
                 </div>
+
+                <!-- Flecha siguiente -->
+                <button class="gallery-arrow gallery-next" aria-label="Siguiente">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Miniaturas/Indicadores -->
+            <div class="gallery-thumbnails" id="galleryThumbnails">
+                <button class="thumbnail active" data-index="0" style="background-image: url('assets/images/gallery/foto1.jpg')"></button>
+                <button class="thumbnail" data-index="1" style="background-image: url('assets/images/gallery/foto2.jpg')"></button>
+                <button class="thumbnail video" data-index="2" data-video="assets/videos/video1.mp4">
+                    <span class="play-icon-mini">▶</span>
+                </button>
+                <button class="thumbnail" data-index="3" style="background-image: url('assets/images/gallery/foto3.jpg')"></button>
+                <button class="thumbnail" data-index="4" style="background-image: url('assets/images/gallery/foto4.jpg')"></button>
+                <button class="thumbnail video" data-index="5" data-video="assets/videos/video2.mp4">
+                    <span class="play-icon-mini">▶</span>
+                </button>
+                <button class="thumbnail" data-index="6" style="background-image: url('assets/images/gallery/foto5.jpg')"></button>
+                <button class="thumbnail" data-index="7" style="background-image: url('assets/images/gallery/foto6.jpg')"></button>
             </div>
         </div>
     </section>
+
+    <!-- MODAL LIGHTBOX -->
+    <div class="lightbox-modal" id="lightboxModal">
+        <div class="lightbox-content">
+            <button class="lightbox-close" id="lightboxClose">&times;</button>
+            <button class="lightbox-arrow lightbox-prev" id="lightboxPrev">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
+            <div class="lightbox-display" id="lightboxDisplay">
+                <img src="assets/images/gallery/foto1.jpg" alt="Proyecto" class="lightbox-img">
+            </div>
+            <button class="lightbox-arrow lightbox-next" id="lightboxNext">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </button>
+        </div>
+    </div>
 
     <!-- CLIENTES (Carrusel infinito) -->
     <section id="clientes" class="clientes">
