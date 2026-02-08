@@ -369,10 +369,17 @@ body {
 }
 
 .navbar-logo {
-    height: 28px;
+    height: 48px;
     width: auto;
-    margin-right: 15px;
+    margin-right: 18px;
     vertical-align: middle;
+}
+
+@media (max-width: 600px) {
+    .navbar-logo {
+        height: 36px;
+        margin-right: 12px;
+    }
 }
 
 .nav-links {
@@ -541,6 +548,23 @@ body {
     display: block;
 }
 
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: var(--spacing-sm);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+.stat-label {
+    font-size: 0.95rem;
+    color: var(--dark);
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.4;
+}
+
 .stat-card h3 {
     font-size: 1.25rem;
     margin-bottom: var(--spacing-sm);
@@ -550,7 +574,8 @@ body {
 
 .stat-card p {
     color: var(--gray);
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    line-height: 1.5;
 }
 
 /* ============================================
@@ -1291,6 +1316,10 @@ body {
 
     .stat-card {
         padding: var(--spacing-md);
+    }
+
+    .stat-number {
+        font-size: 2.8rem;
     }
 
     .stat-icon {

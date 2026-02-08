@@ -589,9 +589,53 @@ function initProvidersCarousel() {
     window.addEventListener('resize', track._providersResizeHandler, { passive: true });
 }
 
+// ============================================
+// ANIMACIÓN DE NÚMEROS (Conteo)
+// ============================================
+
+function animateCountUp() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    const observerOptions = {
+        threshold: 0.5,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && !entry.target.hasAttribute('data-animated')) {
+                entry.target.setAttribute('data-animated', 'true');
+                const target = parseInt(entry.target.getAttribute('data-target'));
+                const suffix = entry.target.getAttribute('data-suffix') || '';
+                const duration = 2000; // 2 segundos
+                const start = Date.now();
+                
+                const animate = () => {
+                    const now = Date.now();
+                    const progress = Math.min((now - start) / duration, 1);
+                    const current = Math.floor(progress * target);
+                    
+                    entry.target.textContent = current + suffix;
+                    
+                    if (progress < 1) {
+                        requestAnimationFrame(animate);
+                    } else {
+                        entry.target.textContent = target + suffix;
+                    }
+                };
+                
+                animate();
+            }
+        });
+    }, observerOptions);
+    
+    statNumbers.forEach(number => observer.observe(number));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     initClientsCarousel();
     initProvidersCarousel();
+    animateCountUp();
 });
 
 // Inicializar con el número proporcionado al cargar la página
